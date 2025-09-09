@@ -1,0 +1,242 @@
+[
+  {
+    "value": "192.168.0.24/32",
+    "type": "ip",
+    "source": "spamhaus",
+    "timestamp": "2025-08-30T12:00:00Z"
+  },
+  {
+    "value": "example.com/malware.exe",
+    "type": "url",
+    "source": "digitalside",
+    "timestamp": "2025-08-30T12:10:00Z"
+  },
+  {
+    "value": "93.184.216.34",
+    "type": "ip",
+    "source": "blocklist.de",
+    "timestamp": "2025-08-30T12:05:02Z"
+  },
+  {
+    "value": "192.168.0.0/16",
+    "type": "subnet",
+    "source": "blocklist.de",
+    "timestamp": "2025-08-29T11:00:00Z"
+  },
+  {
+    "value": "phishing.site",
+    "type": "url",
+    "source": "spamhaus",
+    "timestamp": "2025-08-29T15:00:00Z"
+  },
+  {
+    "value": "203.0.113.1",
+    "type": "ip",
+    "source": "digitalside",
+    "timestamp": "2025-08-29T16:20:00Z"
+  },
+  {
+    "value": "198.51.100.45",
+    "type": "ip",
+    "source": "alienvault",
+    "timestamp": "2025-08-31T09:30:00Z"
+  },
+  {
+    "value": "bad-actor.net",
+    "type": "domain",
+    "source": "abuse.ch",
+    "timestamp": "2025-08-31T10:00:00Z"
+  },
+  {
+    "value": "hxxp://malicious-download.org/ransomware.zip",
+    "type": "url",
+    "source": "malwarebazaar",
+    "timestamp": "2025-08-31T10:15:00Z"
+  },
+  {
+    "value": "5f4dcc3b5aa765d61d8327deb882cf99",
+    "type": "md5",
+    "source": "virustotal",
+    "timestamp": "2025-08-31T11:00:00Z"
+  },
+  {
+    "value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "type": "sha256",
+    "source": "hybrid-analysis",
+    "timestamp": "2025-08-31T11:20:00Z"
+  },
+  {
+    "value": "attacker@phishingmail.com",
+    "type": "email",
+    "source": "spamhaus",
+    "timestamp": "2025-08-31T12:00:00Z"
+  },
+  {
+    "value": "45.33.32.156",
+    "type": "ip",
+    "source": "cybercrime-tracker",
+    "timestamp": "2025-08-31T12:30:00Z"
+  },
+  {
+    "value": "tor-exit-node.org",
+    "type": "domain",
+    "source": "torproject",
+    "timestamp": "2025-08-31T13:00:00Z"
+  },
+  {
+    "value": "8.8.8.8",
+    "type": "ip",
+    "source": "blocklist.de",
+    "timestamp": "2025-09-01T08:00:00Z"
+  },
+  {
+    "value": "stealer.exe",
+    "type": "filename",
+    "source": "malwarebazaar",
+    "timestamp": "2025-09-01T09:00:00Z"
+  },
+  {
+    "value": "darkweb-market.org",
+    "type": "domain",
+    "source": "abuse.ch",
+    "timestamp": "2025-09-01T09:30:00Z"
+  },
+  {
+    "value": "91.121.134.23",
+    "type": "ip",
+    "source": "alienvault",
+    "timestamp": "2025-09-01T10:00:00Z"
+  },
+  {
+    "value": "user@compromisedmail.net",
+    "type": "email",
+    "source": "spamhaus",
+    "timestamp": "2025-09-01T10:30:00Z"
+  },
+  {
+    "value": "abcd1234abcd1234abcd1234abcd1234abcd1234",
+    "type": "sha1",
+    "source": "virustotal",
+    "timestamp": "2025-09-01T11:00:00Z"
+  },
+  {
+    "value": "ransomware-locker.com",
+    "type": "domain",
+    "source": "cybercrime-tracker",
+    "timestamp": "2025-09-01T11:30:00Z"
+  },
+  {
+    "value": "evilscript.js",
+    "type": "filename",
+    "source": "digitalside",
+    "timestamp": "2025-09-01T12:00:00Z"
+  },
+  {
+    "value": "156.232.10.55",
+    "type": "ip",
+    "source": "malwarebazaar",
+    "timestamp": "2025-09-01T12:20:00Z"
+  },
+  {
+    "value": "dropper.bin",
+    "type": "filename",
+    "source": "hybrid-analysis",
+    "timestamp": "2025-09-01T12:40:00Z"
+  },
+  {
+    "value": "compromised-server.org",
+    "type": "domain",
+    "source": "abuse.ch",
+    "timestamp": "2025-09-01T13:00:00Z"
+  },
+  {
+    "value": "malicious-update.exe",
+    "type": "filename",
+    "source": "alienvault",
+    "timestamp": "2025-09-01T13:20:00Z"
+  },
+  {
+    "value": "hxxp://fakebank-login.com/login.php",
+    "type": "url",
+    "source": "phishtank",
+    "timestamp": "2025-09-01T13:45:00Z"
+  },
+  {
+    "value": "34.56.78.90",
+    "type": "ip",
+    "source": "blocklist.de",
+    "timestamp": "2025-09-01T14:00:00Z"
+  },
+  {
+    "value": "spyware.apk",
+    "type": "filename",
+    "source": "virustotal",
+    "timestamp": "2025-09-01T14:30:00Z"
+  },
+  {
+    "value": "evilmail@scammer.com",
+    "type": "email",
+    "source": "spamhaus",
+    "timestamp": "2025-09-01T15:00:00Z"
+  },
+  {
+    "value": "1337h4x0r.org",
+    "type": "domain",
+    "source": "cybercrime-tracker",
+    "timestamp": "2025-09-01T15:30:00Z"
+  },
+  {
+    "value": "ransomnote.txt",
+    "type": "filename",
+    "source": "malwarebazaar",
+    "timestamp": "2025-09-01T16:00:00Z"
+  },
+  {
+    "value": "51.38.12.99",
+    "type": "ip",
+    "source": "alienvault",
+    "timestamp": "2025-09-01T16:20:00Z"
+  },
+  {
+    "value": "btc_wallet:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    "type": "bitcoin",
+    "source": "abuse.ch",
+    "timestamp": "2025-09-01T16:40:00Z"
+  },
+  {
+    "value": "hxxps://update-fake.com/setup.exe",
+    "type": "url",
+    "source": "phishtank",
+    "timestamp": "2025-09-01T17:00:00Z"
+  },
+  {
+    "value": "evilvpn.net",
+    "type": "domain",
+    "source": "cybercrime-tracker",
+    "timestamp": "2025-09-01T17:20:00Z"
+  },
+  {
+    "value": "123.45.67.89",
+    "type": "ip",
+    "source": "spamhaus",
+    "timestamp": "2025-09-01T17:40:00Z"
+  },
+  {
+    "value": "keylogger.dll",
+    "type": "filename",
+    "source": "hybrid-analysis",
+    "timestamp": "2025-09-01T18:00:00Z"
+  },
+  {
+    "value": "malicious.user@fraudmail.com",
+    "type": "email",
+    "source": "spamhaus",
+    "timestamp": "2025-09-01T18:20:00Z"
+  },
+  {
+    "value": "trojan-loader.apk",
+    "type": "filename",
+    "source": "virustotal",
+    "timestamp": "2025-09-01T18:40:00Z"
+  }
+]
