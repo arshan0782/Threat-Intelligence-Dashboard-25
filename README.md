@@ -1,10 +1,10 @@
-Of course. Here is the complete README.md file for your project, including the architecture and build/run instructions based on the technologies you've used.
 
-Threat Intelligence UI Dashboard
-Project Overview
+
+**Threat Intelligence UI Dashboard**
+*Project Overview*
 This project is a modern web application designed to fetch, display, and interact with threat intelligence feeds. The dashboard provides a user-friendly interface to visualize key Indicators of Compromise (IOCs) such as IP addresses, URLs, and filenames. The application focuses on delivering a clean, responsive, and data-rich experience.
 
-Architecture
+**Architecture**
 The application follows a component-based architecture built on React and Next.js.
 
 Front-End: The user interface is built with React and styled using TailwindCSS for rapid, utility-first development. This approach ensures a modular and maintainable codebase.
