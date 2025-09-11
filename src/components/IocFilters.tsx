@@ -4,14 +4,15 @@ import { FaSearch, FaSyncAlt } from "react-icons/fa";
 interface Props {
   searchTerm: string;
   setSearchTerm: (value: string) => void;
-  filterType: "all" | "ip" | "url" | "subnet" | "domain";
-  setFilterType: (value: "all" | "ip" | "url" | "subnet" | "domain") => void;
+ filterType: "all" | "IPs" | "URLs" | "Subnets" | "Domains";
+  setFilterType: (value: "all" | "IPs" | "URLs" | "Subnets" | "Domains") => void;
   currentPage: number;
   setCurrentPage: (page: number) => void;
   fetchIOCs: () => void;
   inputClasses: string;
   searchIconClasses: string;
 }
+
 
 const IocFilters: React.FC<Props> = ({
   searchTerm,
@@ -49,10 +50,10 @@ const IocFilters: React.FC<Props> = ({
         aria-label="Filter IOC Type"
       >
         <option value="all">All Types</option>
-        <option value="ip">IPs</option>
-        <option value="url">URLs</option>
-        <option value="subnet">Subnets</option>
-        <option value="domain">Domains</option>
+        <option value="IPs">IPs</option>
+        <option value="URLs">URLs</option>
+        <option value="Subnets">Subnets</option>
+        <option value="Domains">Domains</option>
       </select>
 
       <button

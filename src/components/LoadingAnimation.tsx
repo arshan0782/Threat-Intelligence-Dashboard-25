@@ -12,7 +12,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ darkMode, loading }
         darkMode ? "bg-gray-900" : "bg-gray-100"
       }`}
     >
-      <style jsx>{`
+      <style>{`
         @keyframes pulse-1 {
           0% { transform: scale(0.6); opacity: 1; }
           100% { transform: scale(1.2); opacity: 0; }
@@ -51,7 +51,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ darkMode, loading }
 
       <div className="loading-pulse"></div>
       <p className="mt-8 text-2xl font-bold loading-text">
-        {loading ? "डेटा लोड हो रहा है..." : "प्रमाणीकरण लोड हो रहा है..."}
+        {loading ? "डेटा लोड हो रहा है..." : "कृपया प्रतीक्षा करें लोड हो रहा है..."}
       </p>
     </div>
   );

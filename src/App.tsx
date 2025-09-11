@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { FaMoon,FaSun,FaSearch,FaSyncAlt,FaUserCircle,FaBell,} from "react-icons/fa";
-
-import { SummaryCard } from "./components/SummaryCard.tsx";
+import { FaSearch, FaSyncAlt } from "react-icons/fa";
+import Header from "./components/Header";
+import { SummaryCard } from "./components/SummaryCard";
 import IocFilters from "./components/IocFilters";
 import IocTable from "./components/IocTable";
 import Pagination from "./components/Pagination";
@@ -9,10 +9,18 @@ import IocPieChart from "./components/IocPieChart";
 import IocHistogram from "./components/IocHistogram";
 import Progress from "./components/Progress";
 import LoadingAnimation from "./components/LoadingAnimation";
+import Footer from "./components/Footer";
 
 interface IOC {
   value: string;
-  type: "ip" | "url" | "subnet" | "domain";
+  type:
+    | "IPs"
+    | "URLs"
+    | "Subnets"
+    | "Domains"
+    | "Emails"
+    | "Filenames"
+    | "Bitcoin wallets";
   source: string;
   timestamp: string;
 }
@@ -26,7 +34,7 @@ const App = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState<
-    "all" | "ip" | "url" | "subnet" | "domain"
+    "all" | "IPs" | "URLs" | "Subnets" | "Domains"
   >("all");
   const [darkMode, setDarkMode] = useState(() =>
     JSON.parse(localStorage.getItem("darkMode") || "true")
@@ -55,6 +63,7 @@ const App = () => {
   useEffect(() => {
     fetchIOCs();
   }, [fetchIOCs]);
+
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
@@ -67,8 +76,9 @@ const App = () => {
 
   const filteredIocs = useMemo(() => {
     let filtered = iocs;
-    if (filterType !== "all")
+    if (filterType !== "all") {
       filtered = filtered.filter((ioc) => ioc.type === filterType);
+    }
     if (debouncedSearch) {
       filtered = filtered.filter(
         (ioc) =>
@@ -94,7 +104,7 @@ const App = () => {
     currentPage * PAGE_SIZE
   );
 
-  const toggleDarkMode = () => setDarkMode((d) => !d);
+  const toggleDarkMode = () => setDarkMode(() => !darkMode);
 
   const themeClasses = darkMode
     ? "bg-gray-900 text-white"
@@ -117,27 +127,29 @@ const App = () => {
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
   }, [iocs]);
 
- if (loading) {
-  return <LoadingAnimation darkMode={darkMode} loading={loading} />;
-}
+  if (loading)
+    return <LoadingAnimation darkMode={darkMode} loading={loading} />;
 
-if (error) {
-  return (
-    <div className={`flex items-center justify-center min-h-screen ${themeClasses}`}>
-      <p className="text-xl text-red-500">Error: {error}</p>
-    </div>
-  );
-}
+  if (error) {
+    return (
+      <div
+        className={`flex items-center justify-center min-h-screen ${themeClasses}`}
+      >
+        <p className="text-xl text-red-500">Error: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen flex flex-col ${themeClasses}`}>
       <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
         <aside
-          className={`w-64 p-6 border-r ${
+          className={`w- p-6 border-r ${
             darkMode ? "border-gray-700" : "border-gray-300"
           } hidden md:block`}
         >
-          <h2 className="text-2xl font-bold mb-8">TID</h2>
+          <h2 className="text-2xl font-bold mb-8">T I D</h2>
           <nav className="flex flex-col gap-4 text-sm">
             <a href="#" className="hover:text-blue-500">
               Dashboard
@@ -151,38 +163,9 @@ if (error) {
           </nav>
         </aside>
 
+        {/* Main Content */}
         <main className="flex-1 p-8 overflow-auto">
-          <header className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold">
-              Threat Intelligence Dashboard
-            </h1>
-            <div className="flex items-center gap-6">
-              <button
-                onClick={toggleDarkMode}
-                aria-label="Toggle Dark Mode"
-                className="p-2 rounded-full hover:bg-gray-700 transition"
-              >
-                {darkMode ? (
-                  <FaSun className="text-yellow-400" size={24} />
-                ) : (
-                  <FaMoon className="text-gray-600" size={24} />
-                )}
-              </button>
-              <button
-                aria-label="Notifications"
-                className="relative p-2 rounded-full hover:bg-gray-700 transition"
-              >
-                <FaBell size={24} />
-                <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
-              </button>
-              <button
-                aria-label="User Profile"
-                className="p-2 rounded-full hover:bg-gray-700 transition"
-              >
-                <FaUserCircle size={28} />
-              </button>
-            </div>
-          </header>
+          <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             <SummaryCard
@@ -192,35 +175,37 @@ if (error) {
               darkMode={darkMode}
             />
             <SummaryCard
-              title="Unique IPs"
-              count={
-                new Set(iocs.filter((i) => i.type === "ip").map((i) => i.value))
-                  .size
-              }
-              icon={<FaSearch />}
-              darkMode={darkMode}
-            />
-            <SummaryCard
-              title="Unique URLs"
+              title="IPs"
               count={
                 new Set(
-                  iocs.filter((i) => i.type === "url").map((i) => i.value)
+                  iocs.filter((i) => i.type === "IPs").map((i) => i.value)
                 ).size
               }
               icon={<FaSearch />}
               darkMode={darkMode}
             />
             <SummaryCard
-              title="Unique Subnets"
+              title="URLs"
               count={
                 new Set(
-                  iocs.filter((i) => i.type === "subnet").map((i) => i.value)
+                  iocs.filter((i) => i.type === "URLs").map((i) => i.value)
+                ).size
+              }
+              icon={<FaSearch />}
+              darkMode={darkMode}
+            />
+            <SummaryCard
+              title="Subnets"
+              count={
+                new Set(
+                  iocs.filter((i) => i.type === "Subnets").map((i) => i.value)
                 ).size
               }
               icon={<FaSearch />}
               darkMode={darkMode}
             />
           </div>
+
           <IocFilters
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
@@ -252,7 +237,6 @@ if (error) {
                 tableHeaderClasses={tableHeaderClasses}
                 tableRowClasses={tableRowClasses}
               />
-
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
@@ -265,15 +249,16 @@ if (error) {
               widgetClasses={widgetClasses}
             />
           </div>
-          <div className="space-y-6">
-    <IocHistogram
-  pieData={pieData}
-  colors={COLORS}
-  widgetClasses={widgetClasses}
-/>
 
-    <Progress darkMode={darkMode} />
-  </div>
+          <div className="space-y-6 mt-6">
+            <IocHistogram
+              pieData={pieData}
+              colors={COLORS}
+              widgetClasses={widgetClasses}
+            />
+            <Progress darkMode={darkMode} />
+          </div>
+          <Footer darkMode={darkMode} />
         </main>
       </div>
     </div>

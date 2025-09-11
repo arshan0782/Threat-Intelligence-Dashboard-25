@@ -28,7 +28,7 @@ const Progress: React.FC<ProgressProps> = ({ darkMode }) => {
       ref={ref}
       className={`p-6 rounded-xl shadow-md ${darkMode ? "bg-gray-800" : "bg-white"}`}
     >
-      <h2 className="text-2xl font-bold mb-6">Progress Overview</h2>
+      <h2 className="text-2xl font-bold mb-6">Progress Detection</h2>
       <div className="space-y-6">
         {skills.map((skill, index) => (
           <div key={index}>

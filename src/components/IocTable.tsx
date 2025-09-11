@@ -3,7 +3,7 @@ import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 export interface IOC {
   value: string;
-  type: "ip" | "url" | "subnet" | "domain";
+  type: "IPs" | "URLs" | "Subnets" | "Domains" | "Emails" | "Filenames" | "Bitcoin wallets";
   source: string;
   timestamp: string;
 }

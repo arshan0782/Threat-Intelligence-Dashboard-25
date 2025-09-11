@@ -14,7 +14,7 @@ interface IocPieChartProps {
 const IocPieChart = ({ pieData, colors, widgetClasses }: IocPieChartProps) => {
   return (
     <div className={`${widgetClasses} rounded-lg  p-6 h-[400px]`}>
-      <h3 className="text-lg font-semibold mb-4">IOC Distribution</h3>
+      <h3 className="text-lg font-semibold mb-1000">IOC Distribution</h3>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
@@ -31,7 +31,17 @@ const IocPieChart = ({ pieData, colors, widgetClasses }: IocPieChartProps) => {
             ))}
           </Pie>
           <Tooltip />
-          <Legend />
+          <Legend
+          verticalAlign="bottom"
+          align="center"
+          layout="horizontal"
+          wrapperStyle={
+            { marginTop: '10px',
+              fontSize: '12px'
+
+             }
+
+          } />
         </PieChart>
       </ResponsiveContainer>
     </div>
