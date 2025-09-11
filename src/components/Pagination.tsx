@@ -6,7 +6,7 @@ interface PaginationProps {
 
 const Pagination = ({ currentPage, totalPages, setCurrentPage }: PaginationProps) => {
   return (
-    <div className="flex justify-between items-center mt-4">
+    <div className="flex justify-between items-center mt-4 mb-2">
       <button
         onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
         disabled={currentPage === 1}

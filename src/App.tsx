@@ -5,6 +5,10 @@ import IocFilters from "./components/IocFilters";
 import IocTable from "./components/IocTable";
 import Pagination from "./components/Pagination";
 import IocPieChart from "./components/IocPieChart";
+import IocHistogram from "./components/IocHistogram";
+
+import Progress from "./components/Progress";
+
 
 interface IOC {
   value: string;
@@ -266,6 +270,15 @@ const App = () => {
               widgetClasses={widgetClasses}
             />
           </div>
+          <div className="space-y-6">
+    <IocHistogram
+  pieData={pieData}
+  colors={COLORS}
+  widgetClasses={widgetClasses}
+/>
+
+    <Progress darkMode={darkMode} />
+  </div>
         </main>
       </div>
     </div>
