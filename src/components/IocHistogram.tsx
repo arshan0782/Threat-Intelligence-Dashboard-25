@@ -1,4 +1,14 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 
 interface HistogramData {
   name: string;
@@ -11,7 +21,11 @@ interface IocHistogramProps {
   widgetClasses: string;
 }
 
-const IocHistogram = ({ pieData, colors, widgetClasses }: IocHistogramProps) => {
+const IocHistogram = ({
+  pieData,
+  colors,
+  widgetClasses,
+}: IocHistogramProps) => {
   return (
     <div className={`${widgetClasses} rounded-lg p-6 h-[400px]`}>
       <h3 className="text-lg font-semibold mb-4">IOC Distribution By Value </h3>
@@ -24,7 +38,10 @@ const IocHistogram = ({ pieData, colors, widgetClasses }: IocHistogramProps) => 
           <Legend />
           <Bar dataKey="value" fill="#8884d8">
             {pieData.map((_, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={colors[index % colors.length]}
+              />
             ))}
           </Bar>
         </BarChart>

@@ -1,11 +1,11 @@
-import React from 'react';
-import { FaSearch, FaSyncAlt } from 'react-icons/fa';
+import React from "react";
+import { FaSearch, FaSyncAlt } from "react-icons/fa";
 
 interface Props {
   searchTerm: string;
   setSearchTerm: (value: string) => void;
-  filterType: 'all' | 'ip' | 'url' | 'subnet' | 'domain';
-  setFilterType: (value: 'all' | 'ip' | 'url' | 'subnet' | 'domain') => void;
+  filterType: "all" | "ip" | "url" | "subnet" | "domain";
+  setFilterType: (value: "all" | "ip" | "url" | "subnet" | "domain") => void;
   currentPage: number;
   setCurrentPage: (page: number) => void;
   fetchIOCs: () => void;
@@ -17,7 +17,7 @@ const IocFilters: React.FC<Props> = ({
   searchTerm,
   setSearchTerm,
   filterType,
-  setFilterType,  
+  setFilterType,
   setCurrentPage,
   fetchIOCs,
   inputClasses,
@@ -25,23 +25,26 @@ const IocFilters: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
-      
       <div className="relative w-full md:w-1/2">
-        <FaSearch className={`absolute left-4 top-1/2 -translate-y-1/2 ${searchIconClasses}`} />
+        <FaSearch
+          className={`absolute left-4 top-1/2 -translate-y-1/2 ${searchIconClasses}`}
+        />
         <input
           type="text"
           placeholder="Search by value or source..."
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className={`w-full pl-12 pr-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500 ${inputClasses}`}
           aria-label="Search IOCs"
         />
       </div>
 
-  
       <select
         value={filterType}
-        onChange={e => { setFilterType(e.target.value as any); setCurrentPage(1); }}
+        onChange={(e) => {
+          setFilterType(e.target.value as any);
+          setCurrentPage(1);
+        }}
         className={`w-full md:w-auto py-3 px-4 rounded-lg border cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${inputClasses}`}
         aria-label="Filter IOC Type"
       >
@@ -53,7 +56,10 @@ const IocFilters: React.FC<Props> = ({
       </select>
 
       <button
-        onClick={() => { fetchIOCs(); setCurrentPage(1); }}
+        onClick={() => {
+          fetchIOCs();
+          setCurrentPage(1);
+        }}
         className="flex items-center gap-2 py-3 px-6 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors duration-200"
         aria-label="Refresh IOCs"
       >

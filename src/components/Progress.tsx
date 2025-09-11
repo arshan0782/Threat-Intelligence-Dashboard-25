@@ -12,7 +12,6 @@ const skills = [
   { name: "Threat Intelligence", level: 90 },
 ];
 
-// ✅ Different colors for each progress bar
 const lightColors = ["bg-blue-600", "bg-green-600", "bg-yellow-600", "bg-red-600"];
 const darkColors = ["bg-blue-400", "bg-green-400", "bg-yellow-400", "bg-red-400"];
 
@@ -20,7 +19,7 @@ const Progress: React.FC<ProgressProps> = ({ darkMode }) => {
   const barBg = darkMode ? "bg-gray-700" : "bg-gray-300";
   const colors = darkMode ? darkColors : lightColors;
 
-  // ref for scroll trigger
+
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-50px" });
 

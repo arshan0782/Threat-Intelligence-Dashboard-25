@@ -1,14 +1,14 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { FaMoon,FaSun,FaSearch,FaSyncAlt,FaUserCircle,FaBell,} from "react-icons/fa";
+
 import { SummaryCard } from "./components/SummaryCard.tsx";
 import IocFilters from "./components/IocFilters";
 import IocTable from "./components/IocTable";
 import Pagination from "./components/Pagination";
 import IocPieChart from "./components/IocPieChart";
 import IocHistogram from "./components/IocHistogram";
-
 import Progress from "./components/Progress";
-
+import LoadingAnimation from "./components/LoadingAnimation";
 
 interface IOC {
   value: string;
@@ -117,22 +117,17 @@ const App = () => {
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
   }, [iocs]);
 
-  if (loading)
-    return (
-      <div
-        className={`flex items-center justify-center min-h-screen ${themeClasses}`}
-      >
-        <p className="text-xl">Loading...</p>
-      </div>
-    );
-  if (error)
-    return (
-      <div
-        className={`flex items-center justify-center min-h-screen ${themeClasses}`}
-      >
-        <p className="text-xl text-red-500">Error: {error}</p>
-      </div>
-    );
+ if (loading) {
+  return <LoadingAnimation darkMode={darkMode} loading={loading} />;
+}
+
+if (error) {
+  return (
+    <div className={`flex items-center justify-center min-h-screen ${themeClasses}`}>
+      <p className="text-xl text-red-500">Error: {error}</p>
+    </div>
+  );
+}
 
   return (
     <div className={`min-h-screen flex flex-col ${themeClasses}`}>

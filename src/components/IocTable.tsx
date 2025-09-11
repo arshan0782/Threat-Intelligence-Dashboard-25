@@ -34,7 +34,11 @@ const IocTable = ({
                 className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer select-none"
                 onClick={() => requestSort(key as keyof IOC)}
                 aria-sort={
-                  sortConfig?.key === key ? sortConfig.direction : "none"
+                  sortConfig?.key === key
+                    ? sortConfig.direction === "asc"
+                      ? "ascending"
+                      : "descending"
+                    : "none"
                 }
                 tabIndex={0}
                 onKeyDown={(e) => {

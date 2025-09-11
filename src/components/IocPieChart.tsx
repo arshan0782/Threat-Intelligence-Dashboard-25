@@ -2,7 +2,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recha
 
 interface PieData {
   name: string;
-  source: string;
+  value: number;
 }
 
 interface IocPieChartProps {
@@ -14,7 +14,7 @@ interface IocPieChartProps {
 const IocPieChart = ({ pieData, colors, widgetClasses }: IocPieChartProps) => {
   return (
     <div className={`${widgetClasses} rounded-lg  p-6 h-[400px]`}>
-      <h3 className="text-lg font-semibold mb-4">IOC Category Distribution</h3>
+      <h3 className="text-lg font-semibold mb-4">IOC Distribution</h3>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
