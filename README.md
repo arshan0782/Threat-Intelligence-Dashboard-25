@@ -4,6 +4,11 @@
 *Project Overview*
 This project is a modern and interactive web application designed to serve as a dashboard for visualizing threat intelligence data. Built with a robust and scalable architecture, it provides a clean and responsive user interface to help security professionals monitor and analyze key Indicators of Compromise (IOCs) such as malicious IP addresses, URLs, and filenames. The application is centered on delivering an intuitive, high-performance, and data-rich experience with smooth user interactions.
 
+### 📊 Dashboard image dark Theme
+![Dashboard alt](https://github.com/arshan0782/Threat-Intelligence-Dashboard-25/blob/2f4d2f1694b0d12919f37d6f03b68d26b1980bea/Screenshot%202025-10-03%20091056.png)
+### 📊 Dashboard image Light Theme
+![Dashboard alt](https://github.com/arshan0782/Threat-Intelligence-Dashboard-25/blob/7eace409a2dc3333bf502f45973d25826ecbacdf/Screenshot%202025-10-03%20091516.png)
+
 **Technical Stack**
 This dashboard is built using a modern front-end stack that emphasizes performance, maintainability, and a superior user experience (UX).
 
@@ -56,7 +61,5 @@ npm run build
 # or yarn build
  
 
-### 📊 Dashboard image 
-![Dashboard alt](https://github.com/arshan0782/Threat-Intelligence-Dashboard-25/blob/2f4d2f1694b0d12919f37d6f03b68d26b1980bea/Screenshot%202025-10-03%20091056.png)
 
 
