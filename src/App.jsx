@@ -1,90 +1,65 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { FaSearch, FaSyncAlt } from "react-icons/fa";
-import Header from "./components/Header";
-import { SummaryCard } from "./components/SummaryCard";
-import IocFilters from "./components/IocFilters";
-import IocTable from "./components/IocTable";
-import Pagination from "./components/Pagination";
-import IocPieChart from "./components/IocPieChart";
-import IocHistogram from "./components/IocHistogram";
-import Progress from "./components/Progress";
-import LoadingAnimation from "./components/LoadingAnimation";
-import Footer from "./components/Footer";
+import Header from "./components/Header.jsx";
+import { SummaryCard } from "./components/SummaryCard.jsx";
+import IocFilters from "./components/IocFilters.jsx";
+import IocTable from "./components/IocTable.jsx";
+import Pagination from "./components/Pagination.jsx";
+import IocPieChart from "./components/IocPieChart.jsx";
+import IocHistogram from "./components/IocHistogram.jsx";
+import Progress from "./components/Progress.jsx";
+import LoadingAnimation from "./components/LoadingAnimation.jsx";
+import Footer from "./components/Footer.jsx";
+import Sidebar from "./components/Sidebar.jsx";
+import { useThreatStore } from "./store/useThreatStore.js";
 
-interface IOC {
-  value: string;
-  type:
-    | "IPs"
-    | "URLs"
-    | "Subnets"
-    | "Domains"
-    | "Emails"
-    | "Filenames"
-    | "Bitcoin wallets";
-  source: string;
-  timestamp: string;
-}
-
-const PAGE_SIZE = 20;
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const PAGE_SIZE = 10;
+const COLORS = [
+  "#3e3eb5",
+  "#00C49F",
+  "#FFBB28",
+  "#ba1aad",
+  "#FF8042",
+  "#0baa43",
+  "#e80c0c",
+  "#33cde6",
+  "#8e44ad",
+  "#e67e22",
+  "#3498db",
+  "#4d689d",
+];
 
 const App = () => {
-  const [iocs, setIocs] = useState<IOC[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState<
-    "all" | "IPs" | "URLs" | "Subnets" | "Domains"
-  >("all");
+  const { threats, loading, error, fetchThreats, searchTerm, filterType } =
+    useThreatStore();
+
   const [darkMode, setDarkMode] = useState(() =>
     JSON.parse(localStorage.getItem("darkMode") || "true")
   );
-  const [sortConfig, setSortConfig] = useState<{
-    key: keyof IOC;
-    direction: "asc" | "desc";
-  } | null>(null);
+  const [sortConfig, setSortConfig] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchIOCs = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/iocs.json");
-      if (!response.ok) throw new Error("Failed to fetch data.");
-      const data: IOC[] = await response.json();
-      setIocs(data);
-      setError(null);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchIOCs();
-  }, [fetchIOCs]);
+    fetchThreats();
+  }, [fetchThreats]);
 
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
 
-  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
-  useEffect(() => {
-    const handler = setTimeout(() => setDebouncedSearch(searchTerm), 300);
-    return () => clearTimeout(handler);
-  }, [searchTerm]);
-
   const filteredIocs = useMemo(() => {
-    let filtered = iocs;
+    let filtered = threats;
     if (filterType !== "all") {
       filtered = filtered.filter((ioc) => ioc.type === filterType);
     }
-    if (debouncedSearch) {
+    if (searchTerm) {
       filtered = filtered.filter(
+
         (ioc) =>
-          ioc.value.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-          ioc.source.toLowerCase().includes(debouncedSearch.toLowerCase())
+          ioc.value.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          ioc.source.toLowerCase().includes(searchTerm.toLowerCase())
       );
+      
     }
     if (sortConfig !== null) {
       filtered = [...filtered].sort((a, b) => {
@@ -96,7 +71,7 @@ const App = () => {
       });
     }
     return filtered;
-  }, [iocs, filterType, debouncedSearch, sortConfig]);
+  }, [threats, filterType, searchTerm, sortConfig]);
 
   const totalPages = Math.ceil(filteredIocs.length / PAGE_SIZE);
   const paginatedIocs = filteredIocs.slice(
@@ -119,13 +94,22 @@ const App = () => {
     : "bg-white text-gray-900 border-gray-300";
   const searchIconClasses = darkMode ? "text-gray-400" : "text-gray-600";
 
-  const pieData = useMemo(() => {
-    const counts: Record<string, number> = {};
-    iocs.forEach((i) => {
+  // Logic: i.source (spamhaus, blocklist.de) naam ke hisaab se ginti
+  const histogramData = useMemo(() => {
+    const counts = {};
+    threats.forEach((i) => {
+      counts[i.source] = (counts[i.source] || 0) + 1;
+    });
+    return Object.entries(counts).map(([name, source]) => ({ name, source }));
+  }, [threats]);
+  // Logic: i.type (IPs, URLs, Subnets) value ke hisaab se ginti
+  const pieChartData = useMemo(() => {
+    const counts = {};
+    threats.forEach((i) => {
       counts[i.type] = (counts[i.type] || 0) + 1;
     });
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
-  }, [iocs]);
+  }, [threats]);
 
   if (loading)
     return <LoadingAnimation darkMode={darkMode} loading={loading} />;
@@ -143,87 +127,47 @@ const App = () => {
   return (
     <div className={`min-h-screen flex flex-col ${themeClasses}`}>
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
-        <aside
-          className={`w- p-6 border-r ${
-            darkMode ? "border-gray-700" : "border-gray-300"
-          } hidden md:block`}
-        >
-          <h2 className="text-2xl font-bold mb-8">T I D</h2>
-          <nav className="flex flex-col gap-4 text-sm">
-            <a href="#" className="hover:text-blue-500">
-              Dashboard
-            </a>
-            <a href="#" className="hover:text-blue-500">
-              Reports
-            </a>
-            <a href="#" className="hover:text-blue-500">
-              Settings
-            </a>
-          </nav>
-        </aside>
-
-        {/* Main Content */}
-        <main className="flex-1 p-8 overflow-auto">
+        <Sidebar darkMode={darkMode} />
+        <main className="flex-1 p-8 overflow-auto" id="dashboard">
           <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             <SummaryCard
               title="Total IOCs"
-              count={iocs.length}
               icon={<FaSyncAlt />}
               darkMode={darkMode}
+              type="all"
             />
             <SummaryCard
               title="IPs"
-              count={
-                new Set(
-                  iocs.filter((i) => i.type === "IPs").map((i) => i.value)
-                ).size
-              }
               icon={<FaSearch />}
               darkMode={darkMode}
+              type="IPs"
             />
             <SummaryCard
               title="URLs"
-              count={
-                new Set(
-                  iocs.filter((i) => i.type === "URLs").map((i) => i.value)
-                ).size
-              }
               icon={<FaSearch />}
               darkMode={darkMode}
+              type="URLs"
             />
             <SummaryCard
               title="Subnets"
-              count={
-                new Set(
-                  iocs.filter((i) => i.type === "Subnets").map((i) => i.value)
-                ).size
-              }
               icon={<FaSearch />}
               darkMode={darkMode}
+              type="Subnets"
             />
           </div>
-
           <IocFilters
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            filterType={filterType}
-            setFilterType={setFilterType}
-            currentPage={currentPage}
             setCurrentPage={setCurrentPage}
-            fetchIOCs={fetchIOCs}
+            fetchIOCs={fetchThreats}
             inputClasses={inputClasses}
             searchIconClasses={searchIconClasses}
           />
-
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
               <IocTable
                 paginatedIocs={paginatedIocs}
                 sortConfig={sortConfig}
-                requestSort={(key: keyof IOC) => {
+                requestSort={(key) => {
                   setSortConfig((prev) => {
                     if (prev?.key === key) {
                       return {
@@ -244,15 +188,14 @@ const App = () => {
               />
             </div>
             <IocPieChart
-              pieData={pieData}
+              pieChartData={pieChartData}
               colors={COLORS}
               widgetClasses={widgetClasses}
             />
           </div>
-
           <div className="space-y-6 mt-6">
             <IocHistogram
-              pieData={pieData}
+              histogramData={histogramData}
               colors={COLORS}
               widgetClasses={widgetClasses}
             />

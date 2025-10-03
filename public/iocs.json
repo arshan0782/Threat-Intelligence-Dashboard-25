@@ -1,5 +1,5 @@
 [
-  {
+  {  
     "value": "192.168.0.24/32",
     "type": "IPs",
     "source": "spamhaus",
@@ -366,12 +366,6 @@
     "timestamp": "2025-08-30T13:55:00Z"
   },
   {
-    "value": "trojan_loader.bat",
-    "type": "Filenames",
-    "source": "virustotal",
-    "timestamp": "2025-08-30T14:00:00Z"
-  },
-  {
     "value": "1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY",
     "type": "Bitcoin wallets",
     "source": "btc-tracker",
@@ -407,12 +401,7 @@
     "source": "abuse.ch",
     "timestamp": "2025-08-30T14:30:00Z"
   },
-  {
-    "value": "worm_spreader.scr",
-    "type": "Filenames",
-    "source": "virustotal",
-    "timestamp": "2025-08-30T14:35:00Z"
-  },
+
   {
     "value": "3Ai1JZ8pdJb2ksieUV8FsxSNVJCpoPi8W6",
     "type": "Bitcoin wallets",
@@ -449,12 +438,7 @@
     "source": "abuse.ch",
     "timestamp": "2025-08-30T15:05:00Z"
   },
-  {
-    "value": "backdoor_driver.sys",
-    "type": "Filenames",
-    "source": "virustotal",
-    "timestamp": "2025-08-30T15:10:00Z"
-  },
+
   {
     "value": "1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v",
     "type": "Bitcoin wallets",
@@ -491,12 +475,7 @@
     "source": "virustotal",
     "timestamp": "2025-08-30T15:40:00Z"
   },
-  {
-    "value": "3CMCRgEm8HVz3DrWaCCid3vAANE42jcEv9",
-    "type": "Bitcoin wallets",
-    "source": "btc-tracker",
-    "timestamp": "2025-08-30T15:45:00Z"
-  },
+  
   {
     "value": "192.168.50.0/24",
     "type": "Subnets",

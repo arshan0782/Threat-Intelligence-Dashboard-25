@@ -1,17 +1,18 @@
 import React from "react";
 
-interface LoadingAnimationProps {
-  darkMode: boolean;
-  loading: boolean;
-}
+//    
+const LoadingAnimation = ({ darkMode, loading }) => {
+  // If you want the loading screen to only display when 'loading' is true, 
+  // you might add a check here, but based on your structure, 
+  // we'll keep the full component return.
 
-const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ darkMode, loading }) => {
   return (
     <div
       className={`fixed inset-0 z-50 flex flex-col items-center justify-center transition-colors duration-300 ${
         darkMode ? "bg-gray-900" : "bg-gray-100"
       }`}
     >
+      {/* Internal CSS for the pulsing animation */}
       <style>{`
         @keyframes pulse-1 {
           0% { transform: scale(0.6); opacity: 1; }

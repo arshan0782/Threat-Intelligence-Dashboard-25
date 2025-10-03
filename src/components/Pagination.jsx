@@ -1,12 +1,11 @@
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  setCurrentPage: (page: number) => void;
-}
+import React from "react"; 
 
-const Pagination = ({ currentPage, totalPages, setCurrentPage }: PaginationProps) => {
+// Pagination component for navigating between pages
+const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   return (
+    // Pagination controls container
     <div className="flex justify-between items-center mt-4 mb-2">
+      {/* Previous page button */}
       <button
         onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
         disabled={currentPage === 1}
@@ -14,9 +13,11 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }: PaginationProps
       >
         Previous
       </button>
+      {/* Current page indicator */}
       <span>
         Page {currentPage} of {totalPages}
       </span>
+      {/* Next page button */}
       <button
         onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages))}
         disabled={currentPage === totalPages}

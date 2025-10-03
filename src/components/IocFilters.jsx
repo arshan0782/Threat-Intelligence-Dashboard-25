@@ -1,29 +1,15 @@
 import React from "react";
 import { FaSearch, FaSyncAlt } from "react-icons/fa";
+import { useThreatStore } from "../store/useThreatStore.js";
 
-interface Props {
-  searchTerm: string;
-  setSearchTerm: (value: string) => void;
- filterType: "all" | "IPs" | "URLs" | "Subnets" | "Domains";
-  setFilterType: (value: "all" | "IPs" | "URLs" | "Subnets" | "Domains") => void;
-  currentPage: number;
-  setCurrentPage: (page: number) => void;
-  fetchIOCs: () => void;
-  inputClasses: string;
-  searchIconClasses: string;
-}
-
-
-const IocFilters: React.FC<Props> = ({
-  searchTerm,
-  setSearchTerm,
-  filterType,
-  setFilterType,
+const IocFilters = ({
   setCurrentPage,
   fetchIOCs,
   inputClasses,
   searchIconClasses,
 }) => {
+  const { searchTerm, setSearchTerm, filterType, setFilterType } = useThreatStore();
+
   return (
     <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
       <div className="relative w-full md:w-1/2">
@@ -43,7 +29,7 @@ const IocFilters: React.FC<Props> = ({
       <select
         value={filterType}
         onChange={(e) => {
-          setFilterType(e.target.value as any);
+          setFilterType(e.target.value);
           setCurrentPage(1);
         }}
         className={`w-full md:w-auto py-3 px-4 rounded-lg border cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${inputClasses}`}
@@ -58,6 +44,8 @@ const IocFilters: React.FC<Props> = ({
 
       <button
         onClick={() => {
+          setSearchTerm("");
+          setFilterType("all");
           fetchIOCs();
           setCurrentPage(1);
         }}
