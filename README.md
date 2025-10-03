@@ -52,7 +52,7 @@ Bash
 
 npm run dev
 # or yarn dev
-The application will be available at http://localhost:<5173>.
+The application will be available at http://localhost:5173>.
 
 Build for Production:
 Bash
