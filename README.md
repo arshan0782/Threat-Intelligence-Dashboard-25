@@ -57,6 +57,6 @@ npm run build
  
 
 ### 📊 Dashboard image 
-![Dashboard alt](./assets/dashboard.png](https://github.com/arshan0782/Threat-Intelligence-Dashboard-25/blob/2f4d2f1694b0d12919f37d6f03b68d26b1980bea/Screenshot%202025-10-03%20091056.png)
+![Dashboard alt](https://github.com/arshan0782/Threat-Intelligence-Dashboard-25/blob/2f4d2f1694b0d12919f37d6f03b68d26b1980bea/Screenshot%202025-10-03%20091056.png)
 
 
